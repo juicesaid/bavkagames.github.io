@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bavka Games — українські ігри для компанії</title>
+<meta name="description" content="Bavka Games — інді-студія, що робить веселі українські ігри. Наша перша гра — ЕЛІАС, гра в слова для компанії.">
+
+<meta property="og:title" content="Bavka Games">
+<meta property="og:description" content="Українські ігри для компанії. Грай, смійся, вигравай.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bavkagames.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --ink: #14142A;
+    --blue: #006DAA;
+    --yellow: #F2A900;
+    --pink: #E0607A;
+    --green: #00925A;
+    --muted: #6B6B85;
+    --card: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection { background: var(--yellow); color: var(--ink); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Floating blobs ── */
+  .blob {
+    position: absolute;
+    border-radius: 42% 58% 63% 37% / 45% 45% 55% 55%;
+    filter: blur(2px);
+    opacity: 0.85;
+    z-index: 0;
+    animation: float 14s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    33% { transform: translate(14px,-18px) rotate(8deg); }
+    66% { transform: translate(-10px,12px) rotate(-6deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,240,232,0.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(20,20,42,0.06);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 22px;
+    letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 9px;
+    text-decoration: none; color: var(--ink);
+  }
+  .logo .mark {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: var(--yellow);
+    display: grid; place-items: center;
+    font-size: 20px;
+    transform: rotate(-6deg);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .nav-cta {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 15px;
+    background: var(--ink); color: var(--cream);
+    padding: 9px 20px; border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.15s;
+  }
+  .nav-cta:hover { transform: translateY(-2px); }
+
+  /* ── Hero ── */
+  header { position: relative; padding: 90px 0 70px; text-align: center; overflow: hidden; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-weight: 800; font-size: 14px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--pink);
+    background: rgba(224,96,122,0.12);
+    padding: 6px 16px; border-radius: 50px;
+    margin-bottom: 28px;
+    position: relative; z-index: 2;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(44px, 9vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -2px;
+    position: relative; z-index: 2;
+    margin-bottom: 24px;
+  }
+  h1 .play { color: var(--blue); }
+  h1 .games { color: var(--yellow); }
+  .hero-sub {
+    font-size: clamp(17px, 2.4vw, 21px);
+    color: var(--muted);
+    max-width: 540px; margin: 0 auto 40px;
+    font-weight: 600;
+    position: relative; z-index: 2;
+  }
+  .hero-ctas {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 2;
+  }
+  .btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 17px;
+    padding: 15px 32px; border-radius: 50px;
+    text-decoration: none; cursor: pointer; border: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    box-shadow: 0 5px 0 #00507E;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #00507E; }
+  .btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 #00507E; }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 2px solid rgba(20,20,42,0.15);
+  }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-3px); }
+
+  /* ── Featured game ── */
+  .section-label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+    text-align: center; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 44px);
+    text-align: center; letter-spacing: -1px;
+    margin-bottom: 56px;
+  }
+
+  .games { padding: 70px 0; position: relative; }
+  .game-card {
+    background: var(--card);
+    border-radius: 32px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+    box-shadow: 0 20px 60px rgba(20,20,42,0.08);
+    position: relative; overflow: hidden;
+  }
+  .game-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: var(--yellow); opacity: 0.14;
+    border-radius: 50%;
+  }
+  .game-info { position: relative; z-index: 2; }
+  .game-badge {
+    display: inline-block;
+    font-weight: 800; font-size: 12px;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--green);
+    background: rgba(0,146,90,0.12);
+    padding: 5px 14px; border-radius: 50px;
+    margin-bottom: 18px;
+  }
+  .game-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: -1px; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .game-name .e { color: var(--blue); }
+  .game-name .l { color: var(--yellow); }
+  .game-tag {
+    font-weight: 700; font-size: 16px;
+    color: var(--pink); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 22px;
+  }
+  .game-desc { font-size: 17px; color: var(--muted); font-weight: 600; margin-bottom: 26px; }
+  .game-features { list-style: none; margin-bottom: 32px; }
+  .game-features li {
+    font-size: 16px; font-weight: 700;
+    padding: 7px 0; padding-left: 30px; position: relative;
+  }
+  .game-features li::before {
+    content: '✓';
+    position: absolute; left: 0;
+    color: var(--green); font-weight: 900;
+    background: rgba(0,146,90,0.12);
+    width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 13px;
+    top: 8px;
+  }
+
+  /* Phone mockup */
+  .game-visual { position: relative; z-index: 2; display: grid; place-items: center; }
+  .phone {
+    width: 240px; height: 490px;
+    background: var(--ink);
+    border-radius: 38px;
+    padding: 12px;
+    box-shadow: 0 30px 60px rgba(20,20,42,0.25);
+    transform: rotate(3deg);
+    transition: transform 0.4s;
+  }
+  .phone:hover { transform: rotate(0deg) scale(1.02); }
+  .phone-screen {
+    width: 100%; height: 100%;
+    background: var(--cream);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 20px; position: relative;
+  }
+  .phone-screen .ps-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: 42px;
+    letter-spacing: -1px; margin-bottom: 6px;
+  }
+  .phone-screen .ps-logo .e { color: var(--blue); }
+  .phone-screen .ps-logo .l { color: var(--yellow); }
+  .phone-screen .ps-tag {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    color: var(--pink); text-transform: uppercase; margin-bottom: 40px;
+  }
+  .ps-card {
+    background: var(--yellow);
+    border-radius: 20px;
+    padding: 24px 16px;
+    width: 100%; text-align: center;
+    box-shadow: 0 10px 30px rgba(242,169,0,0.4);
+  }
+  .ps-card .ps-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(20,20,42,0.5); margin-bottom: 10px;
+  }
+  .ps-card .ps-word {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: 22px; color: var(--ink);
+    word-break: break-word; line-height: 1.1;
+  }
+  .ps-blob {
+    position: absolute; border-radius: 50%;
+  }
+  .ps-blob.y { width: 90px; height: 90px; background: var(--yellow); opacity:0.2; top: -20px; left: -20px; }
+  .ps-blob.p { width: 80px; height: 80px; background: var(--pink); opacity:0.2; bottom: -15px; right: -15px; }
+
+  /* ── Coming soon card ── */
+  .soon-card {
+    margin-top: 24px;
+    background: transparent;
+    border: 2px dashed rgba(20,20,42,0.18);
+    border-radius: 28px;
+    padding: 40px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .soon-card:hover { border-color: rgba(20,20,42,0.35); }
+  .soon-badge {
+    display: inline-block;
+    font-weight: 800; font-size: 12px;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--yellow);
+    background: rgba(242,169,0,0.15);
+    padding: 5px 14px; border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .soon-name {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: clamp(28px, 5vw, 40px);
+    letter-spacing: -1px; color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .soon-desc { color: var(--muted); font-weight: 600; font-size: 16px; }
+
+  /* ── Values / about ── */
+  .about { padding: 80px 0; position: relative; }
+  .values {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 8px;
+  }
+  .value {
+    background: var(--card);
+    border-radius: 24px; padding: 34px 28px;
+    box-shadow: 0 8px 30px rgba(20,20,42,0.06);
+    transition: transform 0.2s;
+  }
+  .value:hover { transform: translateY(-6px); }
+  .value .emoji {
+    font-size: 40px; margin-bottom: 16px; display: block;
+  }
+  .value h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 20px; margin-bottom: 10px;
+  }
+  .value p { color: var(--muted); font-weight: 600; font-size: 15px; }
+
+  /* ── CTA band ── */
+  .cta-band {
+    margin: 40px 0 90px;
+    background: var(--ink);
+    border-radius: 36px;
+    padding: 64px 40px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before, .cta-band::after {
+    content:''; position: absolute; border-radius: 50%;
+  }
+  .cta-band::before { width: 180px; height:180px; background: var(--blue); opacity: 0.4; top:-50px; left:-40px; }
+  .cta-band::after { width: 150px; height:150px; background: var(--pink); opacity: 0.35; bottom:-40px; right:-30px; }
+  .cta-band h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: clamp(28px, 5vw, 42px);
+    color: var(--cream); letter-spacing: -1px;
+    margin-bottom: 16px; position: relative; z-index: 2;
+  }
+  .cta-band p {
+    color: rgba(245,240,232,0.7); font-size: 18px; font-weight: 600;
+    margin-bottom: 32px; position: relative; z-index: 2;
+  }
+  .cta-band .btn { position: relative; z-index: 2; }
+  .btn-yellow {
+    background: var(--yellow); color: var(--ink);
+    box-shadow: 0 5px 0 #C08600;
+  }
+  .btn-yellow:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #C08600; }
+
+  /* ── Footer ── */
+  footer { padding: 50px 0 40px; border-top: 1px solid rgba(20,20,42,0.08); }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .foot-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 18px;
+  }
+  .foot-links { display: flex; gap: 26px; flex-wrap: wrap; }
+  .foot-links a {
+    color: var(--muted); text-decoration: none; font-weight: 700; font-size: 15px;
+    transition: color 0.15s;
+  }
+  .foot-links a:hover { color: var(--ink); }
+  .foot-copy { color: var(--muted); font-size: 14px; font-weight: 600; width: 100%; margin-top: 8px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 760px) {
+    .game-card { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
+    .game-visual { order: -1; }
+    .phone { width: 200px; height: 410px; }
+    .values { grid-template-columns: 1fr; }
+    header { padding: 60px 0 50px; }
+  }
+
+  a:focus-visible, .btn:focus-visible {
+    outline: 3px solid var(--blue); outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">
+      <span class="mark">🎈</span>
+      Bavka Games
+    </a>
+    <a href="#games" class="nav-cta">Наші ігри</a>
+  </div>
+</nav>
+
+<header>
+  <span class="blob" style="width:160px;height:160px;background:var(--yellow);top:40px;left:6%;"></span>
+  <span class="blob" style="width:120px;height:120px;background:var(--pink);top:120px;right:8%;animation-delay:-4s;"></span>
+  <span class="blob" style="width:90px;height:90px;background:var(--blue);bottom:20px;left:16%;animation-delay:-8s;"></span>
+  <span class="blob" style="width:70px;height:70px;background:var(--green);top:60px;right:22%;animation-delay:-6s;"></span>
+
+  <div class="wrap">
+    <span class="hero-eyebrow">Інді-студія ігор</span>
+    <h1>Ігри, в які <span class="play">весело</span><br>гратися <span class="games">разом</span></h1>
+    <p class="hero-sub">Ми — інді-студія, що створює прості й теплі українські ігри для компанії друзів та сім'ї.</p>
+    <div class="hero-ctas">
+      <a href="#games" class="btn btn-primary">Наші ігри</a>
+      <a href="mailto:contact@bavkagames.com" class="btn btn-ghost">Зв'язатися</a>
+    </div>
+  </div>
+</header>
+
+<section class="games" id="games">
+  <div class="wrap">
+    <div class="section-label">Наші ігри</div>
+    <h2 class="section-title">У що можна пограти</h2>
+
+    <div class="game-card">
+      <div class="game-info">
+        <span class="game-badge">● Доступно в Google Play</span>
+        <div class="game-name"><span class="e">ЕЛІ</span><span class="l">АС</span></div>
+        <div class="game-tag">Гра в слова</div>
+        <p class="game-desc">Один пояснює слово, інші вгадують. Проста, весела й затягуюча гра для будь-якої компанії.</p>
+        <ul class="game-features">
+          <li>Офлайн та онлайн режими</li>
+          <li>2000+ слів українською мовою</li>
+          <li>Грайте компанією 2+ команд</li>
+          <li>Режим «Команда загадує»</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" class="btn btn-primary" target="_blank" rel="noopener">
+          Завантажити безкоштовно
+        </a>
+      </div>
+      <div class="game-visual">
+        <div class="phone">
+          <div class="phone-screen">
+            <span class="ps-blob y"></span>
+            <span class="ps-blob p"></span>
+            <div class="ps-logo"><span class="e">ЕЛІ</span><span class="l">АС</span></div>
+            <div class="ps-tag">Гра в слова</div>
+            <div class="ps-card">
+              <div class="ps-label">Поясни слово:</div>
+              <div class="ps-word">Калина</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="soon-card">
+      <div class="soon-badge">Незабаром</div>
+      <div class="soon-name">ЗОРЕСЛОВ</div>
+      <p class="soon-desc">Нова гра-головоломка зі словами. Вже на підході.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="section-label">Що для нас важливо</div>
+    <h2 class="section-title">Про студію</h2>
+    <div class="values">
+      <div class="value">
+        <span class="emoji">🇺🇦</span>
+        <h3>Українською</h3>
+        <p>Ми робимо ігри рідною мовою. Кожне слово, кожна кнопка — українською.</p>
+      </div>
+      <div class="value">
+        <span class="emoji">🎉</span>
+        <h3>Для компанії</h3>
+        <p>Наші ігри об'єднують. Вони створені щоб гратися разом і сміятися разом.</p>
+      </div>
+      <div class="value">
+        <span class="emoji">✨</span>
+        <h3>Просто й тепло</h3>
+        <p>Ніякого зайвого. Відкрив, зрозумів за секунду, вже граєш і отримуєш кайф.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-band">
+    <h2>Готові пограти?</h2>
+    <p>Наші ігри доступні в Google Play. Безкоштовно.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" class="btn btn-yellow" target="_blank" rel="noopener">
+      ▶ Завантажити ЕЛІАС
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">🎈 Bavka Games</div>
+    <div class="foot-links">
+      <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" target="_blank" rel="noopener">ЕЛІАС</a>
+      <a href="mailto:contact@bavkagames.com">Контакти</a>
+      <a href="/privacy-policy.html">Конфіденційність</a>
+    </div>
+    <div class="foot-copy">© 2026 Bavka Games. Усі права захищені.</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta name="google-site-verification" content="0cYJHcSNBa39yjOkOPilcdUWTnPxnmpLRIMiiYCFKgY" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bavka Games — українські ігри для компанії</title>
@@ -274,33 +273,86 @@
   .ps-blob.y { width: 90px; height: 90px; background: var(--yellow); opacity:0.2; top: -20px; left: -20px; }
   .ps-blob.p { width: 80px; height: 80px; background: var(--pink); opacity:0.2; bottom: -15px; right: -15px; }
 
-  /* ── Coming soon card ── */
-  .soon-card {
-    margin-top: 24px;
-    background: transparent;
-    border: 2px dashed rgba(20,20,42,0.18);
-    border-radius: 28px;
-    padding: 40px;
-    text-align: center;
-    transition: border-color 0.2s;
+  /* ── Second game card (ЗОРЕСЛОВ, space theme) ── */
+  .game-card--space {
+    margin-top: 28px;
+    background: linear-gradient(150deg, #1A1636 0%, #2B1E52 100%);
   }
-  .soon-card:hover { border-color: rgba(20,20,42,0.35); }
-  .soon-badge {
-    display: inline-block;
-    font-weight: 800; font-size: 12px;
-    letter-spacing: 1px; text-transform: uppercase;
-    color: var(--yellow);
-    background: rgba(242,169,0,0.15);
-    padding: 5px 14px; border-radius: 50px;
-    margin-bottom: 14px;
+  .game-card--space::before {
+    background: #7C5CFF; opacity: 0.22;
   }
-  .soon-name {
+  .game-card--space .game-desc { color: rgba(255,255,255,0.7); }
+  .game-card--space .game-features li { color: #EDE9FF; }
+  .game-card--space .game-features li::before {
+    color: #FFD166; background: rgba(255,209,102,0.16);
+  }
+  .game-badge--space {
+    color: #C9B8FF; background: rgba(124,92,255,0.22);
+  }
+  .game-name--space {
     font-family: 'Unbounded', sans-serif;
-    font-weight: 900; font-size: clamp(28px, 5vw, 40px);
-    letter-spacing: -1px; color: var(--ink);
-    margin-bottom: 8px;
+    font-weight: 900; font-size: clamp(34px, 6vw, 52px);
+    letter-spacing: -1px; line-height: 1;
+    color: #fff; margin-bottom: 8px;
   }
-  .soon-desc { color: var(--muted); font-weight: 600; font-size: 16px; }
+  .game-tag--space {
+    font-weight: 700; font-size: 16px; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 22px; color: #FFD166;
+  }
+  .btn-space {
+    background: #7C5CFF; color: #fff;
+    box-shadow: 0 5px 0 #5838D6;
+  }
+  .btn-space:hover { transform: translateY(-3px); box-shadow: 0 8px 0 #5838D6; }
+  .btn-space:active { transform: translateY(2px); box-shadow: 0 2px 0 #5838D6; }
+
+  /* Space phone */
+  .phone--space { transform: rotate(-3deg); }
+  .phone-screen--space {
+    background: radial-gradient(ellipse at 50% 30%, #2B1E52 0%, #140E2E 100%);
+  }
+  .ps-star {
+    position: absolute; width: 4px; height: 4px;
+    background: #fff; border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255,255,255,0.8);
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
+  .ps-logo-space {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; font-size: 30px;
+    color: #fff; letter-spacing: -0.5px;
+    margin-bottom: 6px; z-index:2;
+    text-shadow: 0 0 20px rgba(124,92,255,0.8);
+  }
+  .ps-tag-space {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    color: #FFD166; text-transform: uppercase; margin-bottom: 44px; z-index:2;
+  }
+  .ps-wheel {
+    position: relative; width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 2px solid rgba(124,92,255,0.35);
+    z-index: 2;
+  }
+  .ps-wheel-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 26px; color: #FFD166;
+    text-shadow: 0 0 12px rgba(255,209,102,0.9);
+  }
+  .ps-letter {
+    position: absolute; top: 50%; left: 50%;
+    width: 34px; height: 34px;
+    margin: -17px 0 0 -17px;
+    background: #7C5CFF; color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 16px;
+    box-shadow: 0 0 14px rgba(124,92,255,0.7);
+    transform: rotate(calc(var(--i) * 72deg)) translate(58px) rotate(calc(var(--i) * -72deg));
+  }
 
   /* ── Values / about ── */
   .about { padding: 80px 0; position: relative; }
@@ -348,6 +400,7 @@
     margin-bottom: 32px; position: relative; z-index: 2;
   }
   .cta-band .btn { position: relative; z-index: 2; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
   .btn-yellow {
     background: var(--yellow); color: var(--ink);
     box-shadow: 0 5px 0 #C08600;
@@ -449,10 +502,43 @@
       </div>
     </div>
 
-    <div class="soon-card">
-      <div class="soon-badge">Незабаром</div>
-      <div class="soon-name">ЗОРЕСЛОВ</div>
-      <p class="soon-desc">Нова гра-головоломка зі словами. Вже на підході.</p>
+    <div class="game-card game-card--space">
+      <div class="game-visual">
+        <div class="phone phone--space">
+          <div class="phone-screen phone-screen--space">
+            <span class="ps-star" style="top:14%;left:20%;"></span>
+            <span class="ps-star" style="top:24%;left:70%;width:3px;height:3px;"></span>
+            <span class="ps-star" style="top:40%;left:38%;width:2px;height:2px;"></span>
+            <span class="ps-star" style="top:58%;left:78%;"></span>
+            <span class="ps-star" style="top:70%;left:24%;width:3px;height:3px;"></span>
+            <div class="ps-logo-space">ЗОРЕСЛОВ</div>
+            <div class="ps-tag-space">Сузір'я зі слів</div>
+            <div class="ps-wheel">
+              <span class="ps-letter" style="--i:0">С</span>
+              <span class="ps-letter" style="--i:1">Л</span>
+              <span class="ps-letter" style="--i:2">О</span>
+              <span class="ps-letter" style="--i:3">В</span>
+              <span class="ps-letter" style="--i:4">О</span>
+              <span class="ps-wheel-center">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="game-info">
+        <span class="game-badge game-badge--space">● Доступно в Google Play</span>
+        <div class="game-name game-name--space">ЗОРЕСЛОВ</div>
+        <div class="game-tag game-tag--space">Гра-кросворд зі слів</div>
+        <p class="game-desc">Літери стають зорями, а слова — сузір'ями. З'єднуй літери на колесі й складай слова, щоб заповнити кросворд. Кожен рівень — окрема зоряна система.</p>
+        <ul class="game-features game-features--space">
+          <li>400+ рівнів зі зростанням складності</li>
+          <li>Щоденне сузір'я — нове слово щодня</li>
+          <li>Аркадний режим «Оборона сузір'я»</li>
+          <li>Словник рідковживаних слів</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=com.zoreslov.game" class="btn btn-space" target="_blank" rel="noopener">
+          Завантажити безкоштовно
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -484,10 +570,15 @@
 <section class="wrap">
   <div class="cta-band">
     <h2>Готові пограти?</h2>
-    <p>Наші ігри доступні в Google Play. Безкоштовно.</p>
-    <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" class="btn btn-yellow" target="_blank" rel="noopener">
-      ▶ Завантажити ЕЛІАС
-    </a>
+    <p>Дві українські гри в слова. Обидві безкоштовні в Google Play.</p>
+    <div class="cta-btns">
+      <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" class="btn btn-yellow" target="_blank" rel="noopener">
+        ЕЛІАС
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.zoreslov.game" class="btn btn-space" target="_blank" rel="noopener">
+        ЗОРЕСЛОВ
+      </a>
+    </div>
   </div>
 </section>
 
@@ -496,6 +587,7 @@
     <div class="foot-logo">🎈 Bavka Games</div>
     <div class="foot-links">
       <a href="https://play.google.com/store/apps/details?id=com.elias.wordgame" target="_blank" rel="noopener">ЕЛІАС</a>
+      <a href="https://play.google.com/store/apps/details?id=com.zoreslov.game" target="_blank" rel="noopener">ЗОРЕСЛОВ</a>
       <a href="mailto:contact@bavkagames.com">Контакти</a>
       <a href="/privacy-policy.html">Конфіденційність</a>
     </div>
